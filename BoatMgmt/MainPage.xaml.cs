@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BoatMgmt.Services.Navigation;
+using BoatMgmt.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Gpio;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,19 +24,16 @@ namespace BoatMgmt
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private static readonly int UPDATE_FREQ = 1;
         private Controller Controller;
         
         public MainPage()
         {
             this.InitializeComponent();
 
-            Controller = new Controller();
+            Navigation.Frame = SplitViewFrame;
+            Navigation.Navigate(typeof(Home));
 
-            DispatcherTimer updateTimer = new DispatcherTimer();
-            updateTimer.Tick += UpdateTimer_Tick;
-            updateTimer.Interval = new TimeSpan(0, 0, UPDATE_FREQ);
-            updateTimer.Start();
+            Controller = Controller.Instance();
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -41,16 +41,35 @@ namespace BoatMgmt
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        private void UpdateTimer_Tick(object sender, object e)
+        private void MenuMain_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtBlock1.Text = string.Format("{0} MPG", Controller.LastMilesPerGallon());
-                txtBlock2.Text = string.Format("{0} MPH", Controller.LastMilesPerHour());
-                txtBlock3.Text = string.Format("{0} Gallons", Controller.TotalGallons());
-                txtBlock4.Text = string.Format("{0} Miles", Controller.TotalMiles());
-            }
-            catch (Exception) { }
+            Navigation.Navigate(typeof(Home));
+        }
+
+        private void MenuGas_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.Navigate(typeof(GasPage));
+        }
+
+        private void MenuSpeed_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.Navigate(typeof(SpeedPage));
+        }
+
+        private void MenuGraph_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.Navigate(typeof(GraphPage));
+        }
+
+
+        private void MenuSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.Navigate(typeof(SettingsPage));
+        }
+
+        private void PowerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShutdownManager.BeginShutdown(ShutdownKind.Shutdown, TimeSpan.FromSeconds(0.5));
         }
     }
 }

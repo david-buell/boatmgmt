@@ -9,15 +9,20 @@ namespace BoatMgmt
 {
     public class Controller
     {
+        private static Controller _instance = null;
+
         private static readonly int SPEED_PIN = 25;
         private static readonly int FLOW_PIN = 26;
         private static readonly int AVG_FREQ = 1000;
 
         private static readonly double SPEED_TO_MILES = 1;
-        private static readonly double FLOW_TO_GALLONS = 1;
+
+        private static readonly double FLOW_TO_ML = 0.46;
+        private static readonly double SPEED_TO_MILE = 1;
+        private static readonly double ML_TO_GALLON = 0.000264172;
         private static readonly double SEC_TO_HOURS = 3600;
 
-        private PinCounter flowPin;
+        private PinCounter flowPin; 
         private long flowTotal;
         private PerfCounter flowCounter;
 
@@ -25,7 +30,7 @@ namespace BoatMgmt
         private long speedTotal;
         private PerfCounter speedCounter;
 
-        public Controller()
+        private Controller()
         {
             flowPin = new PinCounter(FLOW_PIN);
             flowCounter = new PerfCounter();
@@ -36,6 +41,15 @@ namespace BoatMgmt
             speedTotal = 0;
 
             Timer timer = new Timer(new TimerCallback(TimerTask), null, AVG_FREQ, AVG_FREQ);
+        }
+
+        public static Controller Instance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Controller();
+            }
+            return _instance;
         }
 
         private void TimerTask(object StateObj)
@@ -53,19 +67,24 @@ namespace BoatMgmt
             catch (Exception) { }
         }
 
+        public double TotalML()
+        {
+            return flowTotal * FLOW_TO_ML;
+        }
+
         public double TotalGallons()
         {
-            return flowTotal * FLOW_TO_GALLONS;
+            return TotalML() * ML_TO_GALLON;
         }
 
         public double TotalMiles()
         {
-            return speedTotal * FLOW_TO_GALLONS;
+            return speedTotal * SPEED_TO_MILES;
         }
 
         public double LastGallonsPerHour()
         {
-            return flowCounter.LastValue() * FLOW_TO_GALLONS * SEC_TO_HOURS;
+            return flowCounter.LastValue() * FLOW_TO_ML * ML_TO_GALLON * SEC_TO_HOURS;
         }
 
         public double LastMilesPerHour()
@@ -76,7 +95,7 @@ namespace BoatMgmt
         public double LastMilesPerGallon()
         {
             var miles = speedCounter.LastValue() * SPEED_TO_MILES;
-            var gallons = flowCounter.LastValue() * FLOW_TO_GALLONS;
+            var gallons = flowCounter.LastValue() * FLOW_TO_ML * ML_TO_GALLON;
 
             return gallons > 0 ? miles/gallons : 0;
         }
