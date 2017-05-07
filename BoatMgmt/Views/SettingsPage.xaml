@@ -13,20 +13,32 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Tank Size" VerticalAlignment="Center" Foreground="White" FontSize="18" />
-            <TextBox Grid.Column="1" x:Name="txtTankSize" HorizontalAlignment="Left" VerticalAlignment="Center" Text="37" Foreground="White" FontSize="18" Margin="10 0 0 0" />
-            <TextBlock Grid.Column="2" Text="Gallons" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10 0 0 0" />
+            <TextBlock Grid.Column="0" Text="Tank Size:" VerticalAlignment="Center" Foreground="White" FontSize="18" />
+            <TextBox Grid.Column="1" x:Name="txtTankSize" VerticalAlignment="Center" Text="" Foreground="White" FontSize="18" Margin="10 0 0 0" LostFocus="txtTankSize_LostFocus" />
+            <TextBlock Grid.Column="2" Text="gallons" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10 0 0 0" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Gas Left" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTankFill" HorizontalAlignment="Left" VerticalAlignment="Center" Text="35.2" Foreground="White" FontSize="18" Margin="10 0 0 0" />
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="Gallons" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10 0 0 0" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Gas Left:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtGasLeft" VerticalAlignment="Center" Text="" Foreground="White" FontSize="18" Margin="10 0 0 0" LostFocus="txtGasLeft_LostFocus" />
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="gallons" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10 0 0 0" />
+            <Button Grid.Row="1" Grid.Column="3" Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="White" Background="#33FFFFFF" Click="btnReset_Click"/>
 
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Speed Conversion:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtSpeedConv" VerticalAlignment="Center" Text="" Foreground="White" FontSize="18" Margin="10 0 0 0" LostFocus="txtSpeedConv_LostFocus" />
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="pulse to feet" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10 0 0 0" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Gas Conversion:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtGasConv" VerticalAlignment="Center" Text="" Foreground="White" FontSize="18" Margin="10 0 0 0" LostFocus="txtGasConv_LostFocus" />
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="pulse to milliliters" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="10 0 0 0" />            
         </Grid>
     </StackPanel>
 </Page>

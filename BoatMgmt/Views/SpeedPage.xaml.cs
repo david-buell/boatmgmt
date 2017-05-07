@@ -22,9 +22,37 @@ namespace BoatMgmt.Views
     /// </summary>
     public sealed partial class SpeedPage : Page
     {
+        private Controller Controller;
+
         public SpeedPage()
         {
             this.InitializeComponent();
+
+            Controller = Controller.Instance();
+
+            DispatcherTimer updateTimer = new DispatcherTimer();
+            updateTimer.Tick += TimerTick;
+            updateTimer.Interval = new TimeSpan(0, 0, MainPage.UPDATE_FREQ);
+            updateTimer.Start();
+
+            Refresh();
+        }
+
+        private void TimerTick(object sender, object e)
+        {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            try
+            {
+                txtSpeedMPH.Text = string.Format("{0:0.##} mph", Controller.CurrentMilesPerHour());
+                txtMax.Text = string.Format("{0:0.##} mph", Controller.MaxSpeed());
+                txtCruising.Text = string.Format("{0:0.##} mph", Controller.CruisingSpeed);
+            }
+            catch (Exception) { }
         }
     }
+
 }

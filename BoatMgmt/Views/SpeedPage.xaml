@@ -7,7 +7,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Black">
 
-    </Grid>
+    <StackPanel Background="Black" Margin="20 20 0 0">
+        <TextBlock Text="Speed" FontSize="24" Foreground="White" />
+        <Grid Margin="20 20 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Current:" VerticalAlignment="Center" Foreground="White" FontSize="18" />
+            <TextBlock Grid.Column="1" x:Name="txtSpeedMPH" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Max:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="txtMax" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Cruising:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="txtCruising" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+        </Grid>
+    </StackPanel>
 </Page>

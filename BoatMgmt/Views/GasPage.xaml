@@ -13,19 +13,36 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Gas Used:" VerticalAlignment="Center" Foreground="White" FontSize="18" />
+            <TextBlock Grid.Column="0" Text="Amount Used:" VerticalAlignment="Center" Foreground="White" FontSize="18" />
             <TextBlock Grid.Column="1" x:Name="txtGasUsedGal" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
             <TextBlock Grid.Column="2" x:Name="txtGasUsedML" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Gas Left:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Amount Left:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="txtGasLeftGal" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
             <TextBlock Grid.Row="1" Grid.Column="2" x:Name="txtGasLeftPercent" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Current Rate:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="txtGasRateGal" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+            <TextBlock Grid.Row="2" Grid.Column="2" x:Name="txtGasRateML" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" Text="Cruising Speed:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="txtCruisingSpeed" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+            <TextBlock Grid.Row="3" Grid.Column="2" x:Name="txtCruisingGas" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" TextWrapping="Wrap" Text="Distance Left:" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="txtDistanceCurrentSpeed" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+            <TextBlock Grid.Row="4" Grid.Column="2" x:Name="txtDistanceCruisingSpeed" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
+            <TextBlock Grid.Row="4" Grid.Column="3" x:Name="txtDistanceMaxSpeed" Text="" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="30 0 0 0" />
 
         </Grid>
     </StackPanel>

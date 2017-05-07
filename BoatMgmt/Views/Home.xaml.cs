@@ -22,9 +22,7 @@ namespace BoatMgmt.Views
     /// </summary>
     public sealed partial class Home : Page
     {
-        private static readonly int UPDATE_FREQ = 1;
         private Controller Controller;
-        private int counter = 0;
 
         public Home()
         {
@@ -33,21 +31,26 @@ namespace BoatMgmt.Views
             Controller = Controller.Instance();
 
             DispatcherTimer updateTimer = new DispatcherTimer();
-            updateTimer.Tick += UpdateTimer_Tick;
-            updateTimer.Interval = new TimeSpan(0, 0, UPDATE_FREQ);
+            updateTimer.Tick += TimerTick;
+            updateTimer.Interval = new TimeSpan(0, 0, MainPage.UPDATE_FREQ);
             updateTimer.Start();
+
+            Refresh();
         }
 
-        private void UpdateTimer_Tick(object sender, object e)
+        private void TimerTick(object sender, object e)
+        {
+            Refresh();
+        }
+
+        private void Refresh()
         {
             try
             {
-                txtBlock1.Text = string.Format("{0} MPG", Controller.LastMilesPerGallon());
-                txtBlock2.Text = string.Format("{0} MPH", Controller.LastMilesPerHour());
-                txtBlock3.Text = string.Format("{0} Gallons", Controller.TotalGallons());
-                txtBlock4.Text = string.Format("{0} Miles", Controller.TotalMiles());
-
-                txtCounter.Text = string.Format("Counter: {0}", ++counter);
+                txtBlock1.Text = string.Format("{0:0.##} mpg", Controller.CurrentMilesPerGallon());
+                txtBlock2.Text = string.Format("{0:0.##} mph", Controller.CurrentMilesPerHour());
+                txtBlock3.Text = string.Format("{0:0.##} gallons", Controller.GasLeftInGallons());
+                txtBlock4.Text = string.Format("{0:0.##} miles", Controller.DistanceTraveledInMiles());
             }
             catch (Exception) { }
         }

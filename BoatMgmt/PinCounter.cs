@@ -47,6 +47,7 @@ namespace BoatMgmt
                 {
                     Interlocked.Increment(ref counter);
                 }
+                return;
             }
             catch (Exception) { }
         }

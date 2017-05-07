@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Microsoft.Graph": "1.2.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
   },
   "frameworks": {

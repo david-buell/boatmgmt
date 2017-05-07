@@ -22,7 +22,6 @@ namespace BoatMgmt.Views
     /// </summary>
     public sealed partial class GasPage : Page
     {
-        private static readonly int UPDATE_FREQ = 1;
         private Controller Controller;
 
         public GasPage()
@@ -32,20 +31,37 @@ namespace BoatMgmt.Views
             Controller = Controller.Instance();
 
             DispatcherTimer updateTimer = new DispatcherTimer();
-            updateTimer.Tick += UpdateTimer_Tick;
-            updateTimer.Interval = new TimeSpan(0, 0, UPDATE_FREQ);
+            updateTimer.Tick += TimerTick;
+            updateTimer.Interval = new TimeSpan(0, 0, MainPage.UPDATE_FREQ);
             updateTimer.Start();
+
+            Refresh();
         }
 
-        private void UpdateTimer_Tick(object sender, object e)
+        private void TimerTick(object sender, object e)
+        {
+            Refresh();
+        }
+
+        private void Refresh()
         {
             try
             {
-                txtGasUsedGal.Text = string.Format("{0} Gallons", Controller.TotalGallons());
-                txtGasUsedML.Text = string.Format("{0} ML", Controller.TotalML());
+                txtGasUsedGal.Text = string.Format("{0:0.##} gallons", Controller.GasUsedInGallons());
+                txtGasUsedML.Text = string.Format("{0:0.##} ml", Controller.GasUsedInML());
 
-                txtGasLeftGal.Text = string.Format("{0} Gallons", 37 - Controller.TotalGallons());
-                txtGasLeftPercent.Text = string.Format("{0}%", ((37.0 - Controller.TotalGallons()) / 37.0) * 100);
+                txtGasLeftGal.Text = string.Format("{0:0.##} gallons", 37 - Controller.GasUsedInGallons());
+                txtGasLeftPercent.Text = string.Format("{0:0.##}%", ((37.0 - Controller.GasUsedInGallons()) / 37.0) * 100);
+
+                txtGasRateGal.Text = string.Format("{0:0.##} gal / hour", Controller.CurrentGallonsPerHour());
+                txtGasRateML.Text = string.Format("{0:0.##} ml / minute", Controller.CurrentMlPerMinute());
+
+                txtCruisingSpeed.Text = string.Format("{0:0.##} miles / hour", Controller.CruisingSpeed);
+                txtCruisingGas.Text = string.Format("{0:0.##} miles / gal", Controller.CruisingGas);
+
+                txtDistanceCurrentSpeed.Text = string.Format("{0:0.##} miles @ current", Controller.DistanceLeft(SpeedEnum.Current));
+                txtDistanceCruisingSpeed.Text = string.Format("{0:0.##} miles @ cruise", Controller.DistanceLeft(SpeedEnum.Cruise));
+                txtDistanceMaxSpeed.Text = string.Format("{0:0.##} miles @ max", Controller.DistanceLeft(SpeedEnum.Max));
             }
             catch (Exception) { }
         }

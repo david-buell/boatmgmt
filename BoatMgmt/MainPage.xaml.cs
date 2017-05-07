@@ -25,7 +25,9 @@ namespace BoatMgmt
     public sealed partial class MainPage : Page
     {
         private Controller Controller;
-        
+
+        public static readonly int UPDATE_FREQ = 1;
+
         public MainPage()
         {
             this.InitializeComponent();
